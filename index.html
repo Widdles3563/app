@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutina Cardio Full Body - 4 Días</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm;
+            background-color: #050505;
+        }
+
+        :root {
+            --bg-main: #050505;
+            --bg-card: #121212;
+            --bg-card-hover: #181818;
+            --red-primary: #dc2626;
+            --red-accent: #f87171;
+            --yellow-primary: #eab308;
+            --yellow-accent: #fde047;
+            --text-light: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --border-dark: #262626;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            line-height: 1.5;
+            font-size: 14px;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER ELEGANTE CON ACCENTOS ROJO/AMARILLO */
+        .header {
+            text-align: center;
+            padding: 24px 20px;
+            background: linear-gradient(180deg, #18181b 0%, #09090b 100%);
+            border: 1px solid var(--border-dark);
+            border-top: 4px solid var(--red-primary);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--red-primary), var(--yellow-primary), var(--red-primary));
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .header h1 span {
+            color: var(--yellow-primary);
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* BARRA DE PROGRESO Y CONTADOR DE ÉXITO */
+        .dashboard-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .counter-box {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .counter-number {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--yellow-primary);
+            line-height: 1;
+            text-shadow: 0 0 15px rgba(234, 179, 8, 0.3);
+            background: #1c1917;
+            border: 2px solid var(--yellow-primary);
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .counter-label {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .counter-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .counter-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .progress-container {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .progress-header span.val {
+            color: var(--red-accent);
+        }
+
+        .progress-bar-bg {
+            height: 10px;
+            background: #171717;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-dark);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--red-primary), var(--yellow-primary));
+            border-radius: 20px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        /* NAVEGACIÓN Y TABS */
+        .tabs-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 130px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            color: var(--text-muted);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--yellow-primary);
+            color: #ffffff;
+            background: #18181b;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1c1917 0%, #0c0a09 100%);
+            border-color: var(--yellow-primary);
+            color: var(--yellow-primary);
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);
+        }
+
+        /* METRICAS DE LA RUTINA */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* DÍAS Y CONTENIDO */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .day-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-left: 5px solid var(--red-primary);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .day-title-group h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .day-subtitle {
+            font-size: 12px;
+            color: var(--yellow-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* BOTÓN ELEGANTE DE CUMPLIDO */
+        .btn-cumpli {
+            background: linear-gradient(135deg, #262626 0%, #171717 100%);
+            border: 1px solid #404040;
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn-cumpli:hover {
+            border-color: var(--yellow-primary);
+            color: var(--yellow-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(234, 179, 8, 0.25);
+        }
+
+        .btn-cumpli.completed {
+            background: linear-gradient(135deg, var(--red-primary) 0%, #991b1b 100%);
+            border-color: #ef4444;
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5);
+        }
+
+        .btn-cumpli.completed::after {
+            content: ' ✓';
+        }
+
+        /* EJERCICIOS */
+        .exercise-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .exercise-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            background: #171717;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #262626;
+            transition: border-color 0.2s ease;
+        }
+
+        .exercise-item:hover {
+            border-color: #404040;
+        }
+
+        .ex-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--yellow-primary);
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(234, 179, 8, 0.6);
+        }
+
+        .ex-info {
+            flex: 1;
+        }
+
+        .ex-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .ex-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ESTRUCTURA BOX */
+        .structure-box {
+            background: linear-gradient(135deg, #171717 0%, #0d0d0d 100%);
+            border: 1px solid var(--border-dark);
+            border-left: 3px solid var(--yellow-primary);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 13px;
+            color: #d4d4d4;
+        }
+
+        .structure-box strong {
+            color: var(--yellow-primary);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* CRONÓMETRO INTERACTIVO ELEGANTE */
+        .timer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timer-display {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--yellow-primary);
+            font-family: monospace;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-timer {
+            background: #262626;
+            border: 1px solid #404040;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .btn-timer:hover {
+            background: var(--red-primary);
+            border-color: var(--red-primary);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        /* PRINT OVERRIDES FOR PDF */
+        @media print {
+            body { background: #000000 !important; color: #ffffff !important; }
+            .tab-nav, .btn-cumpli, .timer-card, .btn-timer { display: none !important; }
+            .tab-content { display: block !important; margin-bottom: 20px; page-break-inside: avoid; }
+            .day-card { border-left-color: var(--red-primary) !important; background: #111111 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <div class="header">
+        <h1>Rutina Cardio <span>Full Body</span></h1>
+        <p>Plan de Alto Rendimiento | 4 Días a la Semana</p>
+    </div>
+
+    <!-- PANEL DE PROGRESO Y CONTADOR DE ÉXITO -->
+    <div class="dashboard-panel">
+        <div class="counter-box">
+            <div class="counter-number" id="completed-count">0</div>
+            <div class="counter-label">
+                <span class="counter-title">Días Completados</span>
+                <span class="counter-subtitle">Meta Semanal: 4 Días</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>Progreso Semanal</span>
+                <span class="val" id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MÉTRICAS GENERALES -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Frecuencia</div>
+            <div class="stat-value" style="color: var(--yellow-primary);">4 Días / Sem</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Duración</div>
+            <div class="stat-value">45 Minutos</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Exigencia Calórica</div>
+            <div class="stat-value" style="color: var(--red-accent);">200 - 300 kcal</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Enfoque</div>
+            <div class="stat-value">Cuerpo Completo</div>
+        </div>
+    </div>
+
+    <!-- BOTONES DE NAVEGACIÓN -->
+    <div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab(event, 'martes')">Martes</button>
+        <button class="tab-btn" onclick="switchTab(event, 'jueves')">Jueves</button>
+        <button class="tab-btn" onclick="switchTab(event, 'viernes')">Viernes</button>
+        <button class="tab-btn" onclick="switchTab(event, 'domingo')">Domingo</button>
+    </div>
+
+    <!-- CRONÓMETRO DE SESIÓN -->
+    <div class="timer-card">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Temporizador de Sesión (45 Min)</div>
+        <div class="timer-display" id="timer-display">45:00</div>
+        <div class="timer-controls">
+            <button class="btn-timer" onclick="startTimer()">Iniciar</button>
+            <button class="btn-timer" onclick="pauseTimer()">Pausar</button>
+            <button class="btn-timer" onclick="resetTimer()">Reiniciar</button>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DÍA: MARTES -->
+    <div id="tab-martes" class="tab-content active">
+        <div class="day-card" style="border-left-color: var(--red-primary);">
+            <div class="day-header">
+                <div class="day-title-group">
+                    <h2>Martes: Cardio Metabólico Híbrido</h2>
+                    <span class="day-subtitle">Quema estimada: ~250 - 300 kcal</span>
+                </div>
+                <button class="btn-cumpli" id="btn-martes" onclick="toggleCumpli('martes')">
+                    Marcar Cumplido
+                </button>
+            </div>
+
+            <ul class="exercise-list">
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Jumping Jacks</div>
+                        <div class="ex-desc">Activación cardiovascular general y acondicionamiento aeróbico</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Squat Jumps / Sentadillas profundas</div>
+                        <div class="ex-desc">Potencia y resistencia muscular del tren inferior</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Mountain Climbers</div>
+                        <div class="ex-desc">Estabilidad de core, hombros y capacidad pulmonar</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Push-ups con toque de hombro</div>
+                        <div class="ex-desc">Fuerza y resistencia de tren superior</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">High Knees (Rodillas al pecho)</div>
+                        <div class="ex-desc">Elevación de pulso e intensidad cardiovascular</div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="structure-box">
+                <strong>Estructura del Entrenamiento</strong>
+                Trabajo interválico de 45 segundos de esfuerzo por 15 segundos de descanso. Realiza 4 rondas completas con 2 minutos de descanso entre cada ronda.
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DÍA: JUEVES -->
+    <div id="tab-jueves" class="tab-content">
+        <div class="day-card" style="border-left-color: var(--yellow-primary);">
+            <div class="day-header">
+                <div class="day-title-group">
+                    <h2>Jueves: Resistencia y Movilidad Aeróbica</h2>
+                    <span class="day-subtitle">Quema estimada: ~200 - 250 kcal</span>
+                </div>
+                <button class="btn-cumpli" id="btn-jueves" onclick="toggleCumpli('jueves')">
+                    Marcar Cumplido
+                </button>
+            </div>
+
+            <ul class="exercise-list">
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Zancadas / Lunges alternadas</div>
+                        <div class="ex-desc">Trabajo de piernas, glúteos y equilibrio dinámico</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Bear Crawl / Gateo de oso</div>
+                        <div class="ex-desc">Activación total del cuerpo, estabilidad y movilidad articular</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Shadow Boxing / Sombra de boxeo</div>
+                        <div class="ex-desc">Cadencia constante de brazos y cardio continuo en Zona 2</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Plancha activa con extensión de brazos</div>
+                        <div class="ex-desc">Fuerza isométrica y resistencia del torso</div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="structure-box">
+                <strong>Estructura del Entrenamiento</strong>
+                Bloques continuos a ritmo constante. 3 rondas de 10 minutos continuos con 2 minutos de descanso entre bloques.
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DÍA: VIERNES -->
+    <div id="tab-viernes" class="tab-content">
+        <div class="day-card" style="border-left-color: var(--red-primary);">
+            <div class="day-header">
+                <div class="day-title-group">
+                    <h2>Viernes: HIIT Full Body Sostenido</h2>
+                    <span class="day-subtitle">Quema estimada: ~280 - 300 kcal</span>
+                </div>
+                <button class="btn-cumpli" id="btn-viernes" onclick="toggleCumpli('viernes')">
+                    Marcar Cumplido
+                </button>
+            </div>
+
+            <ul class="exercise-list">
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Burpees modificados (sin flexión profunda)</div>
+                        <div class="ex-desc">Estímulo cardiometabólico de alto impacto full body</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Skater Jumps (Saltos laterales)</div>
+                        <div class="ex-desc">Agilidad, potencia lateral y acondicionamiento</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Pike Push-ups o Flexiones declinadas</div>
+                        <div class="ex-desc">Enfoque de empuje en hombros y tríceps</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Glute Bridges con elevación de pierna</div>
+                        <div class="ex-desc">Fortalecimiento de la cadena posterior y glúteos</div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="structure-box">
+                <strong>Estructura del Entrenamiento</strong>
+                Formato Tabata ampliado: 40 segundos de trabajo intenso por 20 segundos de descanso. Realiza 5 rondas completas.
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DÍA: DOMINGO -->
+    <div id="tab-domingo" class="tab-content">
+        <div class="day-card" style="border-left-color: var(--yellow-primary);">
+            <div class="day-header">
+                <div class="day-title-group">
+                    <h2>Domingo: Recuperación Activa y Capacidad Aeróbica</h2>
+                    <span class="day-subtitle">Quema estimada: ~200 kcal</span>
+                </div>
+                <button class="btn-cumpli" id="btn-domingo" onclick="toggleCumpli('domingo')">
+                    Marcar Cumplido
+                </button>
+            </div>
+
+            <ul class="exercise-list">
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Caminata a buen ritmo / Jogging suave</div>
+                        <div class="ex-desc">Estímulo aeróbico continuo y oxigenación muscular</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Step-ups o subidas a escalón/banco</div>
+                        <div class="ex-desc">Trabajo aeróbico controlado de bajo impacto</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Rotaciones de torso y movilidad dinámica</div>
+                        <div class="ex-desc">Descompresión articular y flexibilidad activa</div>
+                    </div>
+                </li>
+                <li class="exercise-item">
+                    <div class="ex-icon"></div>
+                    <div class="ex-info">
+                        <div class="ex-name">Sentadilla isométrica contra pared (Wall Sit)</div>
+                        <div class="ex-desc">Resistencia estática y tensión muscular suave</div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="structure-box">
+                <strong>Estructura del Entrenamiento</strong>
+                Circuito fluido continuo de baja intensidad. 35 minutos sin parar a ritmo conversacional suave.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Estructura por sesión: 5 min calentamiento dinámico + 35 min bloque principal + 5 min vuelta a la calma y estiramiento.
+    </div>
+
+    <!-- LÓGICA INTERACTIVA EN JAVASCRIPT -->
+    <script>
+        // ESTADO DE DÍAS CUMPLIDOS
+        const state = {
+            martes: false,
+            jueves: false,
+            viernes: false,
+            domingo: false
+        };
+
+        // CARGAR DESDE LOCALSTORAGE AL INICIAR
+        function initApp() {
+            const savedState = localStorage.getItem('routine_cardio_state');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                Object.assign(state, parsed);
+            }
+            updateUI();
+        }
+
+        // CAMBIAR PESTAÑA (CORREGIDO: Recibe e.target explícitamente)
+        function switchTab(evt, dayKey) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            evt.currentTarget.classList.add('active');
+            document.getElementById('tab-' + dayKey).classList.add('active');
+        }
+
+        // ALTERNAR BOTÓN CUMPLÍ
+        function toggleCumpli(dayKey) {
+            state[dayKey] = !state[dayKey];
+            localStorage.setItem('routine_cardio_state', JSON.stringify(state));
+            updateUI();
+        }
+
+        // ACTUALIZAR INTERFAZ Y CONTADORES
+        function updateUI() {
+            let completedCount = 0;
+            const keys = Object.keys(state);
+
+            keys.forEach(key => {
+                const btn = document.getElementById('btn-' + key);
+                if (state[key]) {
+                    completedCount++;
+                    btn.classList.add('completed');
+                    btn.innerText = '¡Día Cumplido!';
+                } else {
+                    btn.classList.remove('completed');
+                    btn.innerText = 'Marcar Cumplido';
+                }
+            });
+
+            // ACTUALIZAR DASHBOARD
+            document.getElementById('completed-count').innerText = completedCount;
+            const percent = Math.round((completedCount / 4) * 100);
+            document.getElementById('progress-percent').innerText = percent + '%';
+            document.getElementById('progress-fill').style.width = percent + '%';
+        }
+
+        // LÓGICA DE CRONÓMETRO
+        let timerSeconds = 45 * 60;
+        let timerInterval = null;
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('timer-display').innerText = 
+                (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                if (timerSeconds > 0) {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                } else {
+                    pauseTimer();
+                    alert('¡Entrenamiento de 45 minutos completado!');
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timerSeconds = 45 * 60;
+            updateTimerDisplay();
+        }
+
+        // INICIALIZAR
+        window.onload = initApp;
+    </script>
+</body>
+</html>
